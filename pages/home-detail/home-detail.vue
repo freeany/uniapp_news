@@ -1,20 +1,20 @@
 <template>
 	<view class="detail">
 		<view class="detail-title">
-			我是个前端开发者，我到底要不要学什么????？
+			{{ article_info.title }}
 		</view>
 		<view class="detail-header">
 			<view class="detail-header__logo">
-				<image src="../../static/logo.png" mode="aspectFill"></image>
+				<image :src="article_info.author.avatar" mode="aspectFill"></image>
 			</view>
 			<view class="detail-header__content">
 				<view class="detail-header__content-title">
-					七月
+					{{article_info.author.author_name}}
 				</view>
 				<view class="detail-header__content-info">
-					<text>2020-06-07 23：04</text>
-					<text>1234 浏览</text>
-					<text>4543 赞</text>
+					<text>{{ article_info.create_time }}</text>
+					<text>{{ article_info.browse_count }}浏览</text>
+					<text>{{ article_info.thumbs_up_count }}赞</text>
 				</view>
 			</view>
 			<button class="detail-header__button" type="default" >关注</button>
@@ -44,7 +44,16 @@
 
 <script>
 	export default {
-		
+		name: 'home-detail',
+		onLoad(query) {
+			const params = JSON.parse(query.params)
+			this.article_info = params
+		},
+		data() {
+			return {
+				article_info: {}
+			}
+		}
 	}
 </script>
 <style lang="scss">
